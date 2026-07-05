@@ -289,6 +289,9 @@ a:hover { color: var(--color-gold-600); }
   padding: var(--space-6);
 }
 .hero-card h3 { color: #fff; margin-top: 0; }
+.hero-card p { color: #cad6e8; }
+.hero-card a { color: var(--color-gold-400); text-decoration: underline; }
+.hero-card a:hover { color: #ffe9b3; }
 
 /* Cards */
 .card {
