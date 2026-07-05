@@ -1,0 +1,14 @@
+# Netlify redirects file — server-level redirects (faster than meta-refresh)
+# Format: from  to  status
+
+# Old videos page → YouTube channel (301 permanent)
+/videos.html  https://www.youtube.com/@lancehulseybroker  301!
+/videos       https://www.youtube.com/@lancehulseybroker  301!
+
+# Investment Models Test — QR code in printed book points to /investmentmodel
+# Make absolutely sure this URL never breaks, even on common typos
+/investmentmodel.html       /investmentmodel  301!
+/investment-models-test     /investmentmodel  301!
+/investment-models-test.html /investmentmodel  301!
+/investmentmodels           /investmentmodel  301!
+/InvestmentModel            /investmentmodel  301!

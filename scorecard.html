@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Strength Scorecard for Real Estate Agents — Free Assessment | Wealth Building Broker</title>
+<meta name="description" content="A free 12-question financial strength assessment for real estate agents. Score yourself across Structure, Visibility, Cash Flow & Taxes, and Wealth & Investing. Get an instant 0-100 result and a personalized report.">
+<link rel="canonical" href="https://www.wealthbuildingbroker.com/scorecard">
+<meta property="og:title" content="The Agent's Financial Strength Scorecard — Free Assessment">
+<meta property="og:description" content="12 questions. Instant score. Find out where you actually stand financially as a real estate agent.">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Quiz",
+  "name":"The Agent's Financial Strength Scorecard",
+  "description":"A 12-question diagnostic that scores a real estate agent's financial strength across four pillars: Structure, Visibility, Cash Flow & Taxes, and Wealth & Investing.",
+  "about":"Real estate agent financial strength",
+  "educationalUse":"Self-assessment",
+  "audience":{"@type":"Audience","audienceType":"Real estate agents"},
+  "provider":{"@type":"ProfessionalService","name":"Wealth Building Broker"}
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<style>
+  .scorecard {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: var(--space-7);
+    box-shadow: var(--shadow-sm);
+  }
+  .sc-progress {
+    background: var(--color-bg-soft);
+    border-radius: 999px;
+    overflow: hidden;
+    height: 8px;
+    margin-bottom: var(--space-6);
+  }
+  .sc-progress > div {
+    background: linear-gradient(90deg, var(--color-navy-700), var(--color-red-500));
+    height: 100%;
+    width: 0;
+    transition: width 300ms ease;
+  }
+  .sc-pillar {
+    font-size: .85rem;
+    color: var(--color-red-600);
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+  }
+  .sc-question {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--color-navy-900);
+    line-height: 1.3;
+    margin: 0 0 var(--space-5);
+  }
+  .sc-options {
+    display: grid;
+    gap: 10px;
+    margin-bottom: var(--space-5);
+  }
+  .sc-options label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    cursor: pointer;
+    transition: all 150ms ease;
+    font-size: .98rem;
+    color: var(--color-body);
+  }
+  .sc-options label:hover { border-color: var(--color-red-400); background: var(--color-bg-soft); }
+  .sc-options input[type=radio] {
+    margin: 4px 0 0;
+    accent-color: var(--color-red-600);
+    flex-shrink: 0;
+  }
+  .sc-options label.selected {
+    border-color: var(--color-red-500);
+    background: var(--color-red-100);
+    font-weight: 500;
+  }
+  .sc-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-line);
+  }
+  .sc-counter {
+    font-size: .9rem;
+    color: var(--color-muted);
+  }
+  .sc-result-tier {
+    text-align: center;
+    padding: var(--space-5) var(--space-4);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-5);
+  }
+  .sc-tier-1 { background: linear-gradient(135deg, #ffe4e4, #fed7d7); border: 2px solid var(--color-red-500); }
+  .sc-tier-2 { background: linear-gradient(135deg, #fff4d4, #fff0c0); border: 2px solid #d4a017; }
+  .sc-tier-3 { background: linear-gradient(135deg, #d4f1e0, #b8e6c8); border: 2px solid #1e7f56; }
+  .sc-score-num {
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--color-navy-900);
+    line-height: 1;
+  }
+  .sc-pillar-bar {
+    display: grid;
+    grid-template-columns: 200px 1fr 60px;
+    gap: var(--space-4);
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+  @media (max-width: 640px) {
+    .sc-pillar-bar { grid-template-columns: 1fr auto; }
+    .sc-pillar-bar .bar-wrap { grid-column: 1 / -1; }
+  }
+  .bar-wrap {
+    background: var(--color-bg-soft);
+    border-radius: 999px;
+    height: 14px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    background: linear-gradient(90deg, var(--color-navy-700), var(--color-red-500));
+    height: 100%;
+    border-radius: 999px;
+    transition: width 600ms ease;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html" class="brand"><img src="assets/img/logo.png" alt="Wealth Building Broker logo" class="brand-mark"><span>Wealth Building Broker</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav-links">
+      <li><a href="agents-cfo.html">The Agent's CFO</a></li>
+      <li><a href="toolkit.html">Toolkit</a></li>
+      <li><a href="coaching-agents.html">For Agents</a></li>
+      <li><a href="agent-investor.html">For Investors</a></li>
+      <li><a href="scorecard.html">Scorecard</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="book.html" class="btn btn-primary btn-sm">Book a Call</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero" style="padding: var(--space-7) 0">
+  <div class="container" style="max-width: 820px">
+    <div class="hero-eyebrow">Free Assessment · 4 Minutes</div>
+    <h1>The Agent's Financial Strength Scorecard</h1>
+    <p class="lead">Twelve questions. Four pillars. One honest read on whether you're <em>building wealth</em> or just <em>building income</em>. No email required to start — get your score instantly.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: var(--space-5)">
+  <div class="container" style="max-width: 720px">
+
+    <div id="scorecard-app" class="scorecard">
+      <!-- Progress bar -->
+      <div class="sc-progress"><div id="sc-bar"></div></div>
+
+      <!-- Question card -->
+      <div id="sc-question-view">
+        <div class="sc-pillar" id="sc-pillar">Pillar 1 · Structure &amp; Protection</div>
+        <h2 class="sc-question" id="sc-question">Loading...</h2>
+        <div class="sc-options" id="sc-options"></div>
+        <div class="sc-nav">
+          <button id="sc-back" class="btn btn-ghost" style="visibility:hidden">← Back</button>
+          <div class="sc-counter"><span id="sc-num">1</span> of 12</div>
+          <button id="sc-next" class="btn btn-primary" disabled>Next →</button>
+        </div>
+      </div>
+
+      <!-- Result view -->
+      <div id="sc-result-view" style="display:none">
+        <div id="sc-tier" class="sc-result-tier">
+          <div class="sc-pillar" style="color: var(--color-navy-700)">Your Score</div>
+          <div class="sc-score-num"><span id="sc-final-score">0</span><span style="font-size: 2rem; color: var(--color-muted)"> / 100</span></div>
+          <h2 id="sc-tier-label" style="margin: var(--space-3) 0 var(--space-2)">—</h2>
+          <p id="sc-tier-message" style="margin: 0; max-width: 480px; margin: 0 auto; color: var(--color-body)">—</p>
+        </div>
+
+        <h3 style="margin-top: var(--space-6)">Pillar Breakdown</h3>
+        <div id="sc-pillar-breakdown" style="margin-bottom: var(--space-6)"></div>
+
+        <h3>Your Top 3 Moves</h3>
+        <ol id="sc-moves" style="font-size: 1.05rem; line-height: 1.7"></ol>
+
+        <!-- Tier-based product recommendation (populated by JS) -->
+        <div id="sc-recommend" style="margin-top: var(--space-6)"></div>
+
+        <div class="callout" style="margin-top: var(--space-6)">
+          <strong>Want the full personalized report?</strong> Drop your email below and I'll send you a deeper breakdown of each pillar, the specific frameworks you're missing, and the three highest-leverage moves for your situation — written in plain English. No spam, no sales sequence. One email.
+        </div>
+
+        <!-- Netlify form for email-gated report delivery -->
+        <form name="scorecard-report" method="POST" action="thanks.html"
+              data-netlify="true" data-netlify-honeypot="bot-field"
+              style="background: var(--color-bg-soft); padding: var(--space-5); border-radius: var(--radius-md); margin-top: var(--space-4)">
+          <input type="hidden" name="form-name" value="scorecard-report">
+          <input type="hidden" name="score" id="sc-form-score">
+          <input type="hidden" name="tier" id="sc-form-tier">
+          <input type="hidden" name="pillars" id="sc-form-pillars">
+          <p style="display:none"><label>Don't fill: <input name="bot-field"></label></p>
+
+          <div style="display: grid; gap: var(--space-3)">
+            <div>
+              <label for="sc-name" style="display:block; font-weight:600; margin-bottom: 4px">Your name</label>
+              <input type="text" id="sc-name" name="name" required style="width:100%; padding: 12px; border: 1px solid var(--color-line); border-radius: var(--radius-sm); font-size: 1rem">
+            </div>
+            <div>
+              <label for="sc-email" style="display:block; font-weight:600; margin-bottom: 4px">Email (for the report)</label>
+              <input type="email" id="sc-email" name="email" required style="width:100%; padding: 12px; border: 1px solid var(--color-line); border-radius: var(--radius-sm); font-size: 1rem">
+            </div>
+            <button type="submit" class="btn btn-primary" style="justify-content:center">📧 Send Me the Full Report →</button>
+          </div>
+        </form>
+
+        <div style="text-align: center; margin-top: var(--space-6)">
+          <p style="color: var(--color-muted)">Or skip the report and talk to me directly:</p>
+          <a href="book.html" class="btn btn-secondary">📅 Book a Free 30-Min Consult →</a>
+          <button id="sc-restart" class="btn btn-ghost" style="margin-top: var(--space-3)">Retake the Scorecard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- About the scorecard -->
+    <div style="margin-top: var(--space-7)">
+      <h2>What the Scorecard Measures</h2>
+      <p>The Financial Strength Scorecard is built around the four pillars I see make or break agent businesses. It's the same diagnostic I run on every new coaching client before we start working together — now available free.</p>
+
+      <div class="grid-2" style="gap: var(--space-4); margin-top: var(--space-5)">
+        <div class="card">
+          <span class="pill">Pillar 1</span>
+          <h3>Structure &amp; Protection</h3>
+          <p>Entity status, business vs. personal account separation, liability protection. Does your structure match your income level?</p>
+        </div>
+        <div class="card">
+          <span class="pill">Pillar 2</span>
+          <h3>Visibility &amp; Numbers</h3>
+          <p>Do you have a real P&amp;L? Do you know your net (not gross)? Do you review numbers monthly or quarterly?</p>
+        </div>
+        <div class="card">
+          <span class="pill">Pillar 3</span>
+          <h3>Cash Flow &amp; Taxes</h3>
+          <p>Commission cash-flow system in place? Tax money set aside? CPA relationship beyond once-a-year filing?</p>
+        </div>
+        <div class="card">
+          <span class="pill">Pillar 4</span>
+          <h3>Wealth &amp; Investing</h3>
+          <p>Is business profit being converted to assets? Any investment property? Net worth target? MREI-style plan?</p>
+        </div>
+      </div>
+
+      <div class="callout callout-info" style="margin-top: var(--space-6)">
+        <strong>Why this matters:</strong> Real estate is a great income business and a terrible wealth business — if you only run it as a sales practice. The agents who reach 55 with a real balance sheet are the ones who treat themselves as a financially literate operator first, a salesperson second. This scorecard tells you which side of that line you're on right now.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:#fff"><img src="assets/img/logo.png" alt="Wealth Building Broker logo" class="brand-mark"><span>Wealth Building Broker</span></div>
+        <p style="margin-top:var(--space-3); color:#aab8cd; max-width:380px">The Agent's CFO — financial strength, entity &amp; tax strategy, and building wealth through real estate.</p>
+        <div class="socials">
+          <a href="https://www.youtube.com/@lancehulseybroker" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+          <a href="https://www.instagram.com/lancehulseybroker" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+          <a href="https://www.amazon.com/Invest-yourself-Strategies-Millennial-investors-ebook/dp/B0F2SK18VJ" target="_blank" rel="noopener" aria-label="Amazon eBook">📘</a>
+        </div>
+      </div>
+      <div><h4>Products</h4><ul><li><a href="scorecard.html">Free Scorecard</a></li><li><a href="toolkit.html">Financial Toolkit</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="boomerang.html">Boomerang</a></li></ul></div>
+      <div><h4>Coaching</h4><ul><li><a href="agents-cfo.html">The Agent's CFO</a></li><li><a href="coaching-agents.html">For Agents</a></li><li><a href="agent-investor.html">For Investors</a></li><li><a href="book.html">Book a Consult</a></li></ul></div>
+      <div><h4>Free Tools</h4><ul><li><a href="scorecard.html">Financial Strength Scorecard</a></li><li><a href="calculators.html">Calculators</a></li><li><a href="tax-guide.html">2026 Tax Guide</a></li><li><a href="free-coaching.html">Library</a></li></ul></div>
+      <div><h4>Learn</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="https://www.youtube.com/@lancehulseybroker" target="_blank" rel="noopener">YouTube</a></li><li><a href="ebook.html">eBook</a></li><li><a href="about.html">About Lance</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="cpa-partnership.html">CPA Partnership</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p><strong>Lance Hulsey</strong> — California Real Estate Broker · <strong>DRE# 01724888</strong> · Co-Investor, KW Thrive SC Franchise, Capitola, California.</p>
+      <p>Keller Williams Realty, Inc., a franchise company, is an Equal Opportunity Employer and supports the Fair Housing Act. Each Keller Williams® office is independently owned and operated.</p>
+      <p><strong>Educational only.</strong> Lance teaches financial frameworks. A qualified CPA renders tax and accounting advice. Coaching outcomes vary and are not guaranteed. See full <a href="disclaimer.html" style="color:#cad6e8">disclaimer</a>.</p>
+      <p>© <span data-year>2026</span> Wealth Building Broker. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/calculators.js"></script>
+<script>
+// ===============================
+// Financial Strength Scorecard
+// ===============================
+const QUESTIONS = [
+  // Pillar 1 — Structure & Protection
+  { pillar: "Structure & Protection", q: "What's your business entity structure today?",
+    options: [
+      { t: "Sole proprietor / no entity", v: 0 },
+      { t: "Single-member LLC (no S-corp election)", v: 4 },
+      { t: "LLC with S-corp election OR straight S-corp", v: 8 },
+      { t: "S-corp with proper reasonable compensation + payroll", v: 10 },
+    ]},
+  { pillar: "Structure & Protection", q: "How separated are your business and personal finances?",
+    options: [
+      { t: "Same accounts. Commissions hit my personal checking.", v: 0 },
+      { t: "Separate business checking, but I move money in/out casually", v: 4 },
+      { t: "Dedicated business account + business credit card; some discipline", v: 7 },
+      { t: "Fully separated: business banking, payroll to me as the owner, no commingling", v: 9 },
+    ]},
+  { pillar: "Structure & Protection", q: "Do you have basic liability protection (E&O + umbrella + entity)?",
+    options: [
+      { t: "E&O only (broker provides it). Nothing else.", v: 0 },
+      { t: "E&O + personal umbrella, but no entity protection", v: 3 },
+      { t: "E&O + umbrella + LLC/S-corp shield", v: 6 },
+    ]},
+
+  // Pillar 2 — Visibility & Numbers
+  { pillar: "Visibility & Numbers", q: "Could you tell me your last 12-month NET income (after expenses) right now, within 10%?",
+    options: [
+      { t: "I know my gross commissions. Net? Not really.", v: 0 },
+      { t: "Roughly, but I'd want to check.", v: 4 },
+      { t: "Yes — I review my P&L monthly and know it within 5%.", v: 9 },
+    ]},
+  { pillar: "Visibility & Numbers", q: "How are you tracking business expenses through the year?",
+    options: [
+      { t: "Shoebox / I'll figure it out at tax time", v: 0 },
+      { t: "Spreadsheet I update sporadically", v: 3 },
+      { t: "QuickBooks/Xero/Wave with monthly categorization", v: 7 },
+      { t: "Bookkeeper handles it; I review monthly", v: 9 },
+    ]},
+  { pillar: "Visibility & Numbers", q: "Do you have a real Profit & Loss statement for last year you could pull up right now?",
+    options: [
+      { t: "No.", v: 0 },
+      { t: "My CPA prepared one for tax purposes, somewhere.", v: 3 },
+      { t: "Yes, current within 30 days, I can read it.", v: 7 },
+    ]},
+
+  // Pillar 3 — Cash Flow & Taxes
+  { pillar: "Cash Flow & Taxes", q: "When a commission check hits, what happens first?",
+    options: [
+      { t: "It goes into checking and gets spent on whatever's due", v: 0 },
+      { t: "I move some to savings, no fixed system", v: 4 },
+      { t: "Fixed percentages go to taxes/profit/owner pay/operating immediately (Profit First-style)", v: 9 },
+    ]},
+  { pillar: "Cash Flow & Taxes", q: "Are you setting tax money aside as commissions come in?",
+    options: [
+      { t: "I get a surprise tax bill every April.", v: 0 },
+      { t: "I try to set some aside but it's inconsistent.", v: 4 },
+      { t: "Fixed % goes to a dedicated tax account every commission. I pay quarterly estimates.", v: 9 },
+    ]},
+  { pillar: "Cash Flow & Taxes", q: "What's your relationship with a CPA?",
+    options: [
+      { t: "I file with TurboTax or H&R Block.", v: 0 },
+      { t: "A CPA prepares my return once a year. No other contact.", v: 3 },
+      { t: "Quarterly check-ins with a CPA who knows my business.", v: 7 },
+    ]},
+
+  // Pillar 4 — Wealth & Investing
+  { pillar: "Wealth & Investing", q: "Do you currently own any investment real estate (not your primary)?",
+    options: [
+      { t: "No.", v: 0 },
+      { t: "One property.", v: 5 },
+      { t: "Two to five properties.", v: 8 },
+      { t: "More than five.", v: 10 },
+    ]},
+  { pillar: "Wealth & Investing", q: "Do you have a specific written net-worth target with a date?",
+    options: [
+      { t: "No.", v: 0 },
+      { t: "Vaguely in my head.", v: 3 },
+      { t: "Yes, specific dollar amount and date, reviewed quarterly.", v: 8 },
+    ]},
+  { pillar: "Wealth & Investing", q: "What percentage of your business profit gets routed into investment assets each year?",
+    options: [
+      { t: "0% — it all gets consumed", v: 0 },
+      { t: "1–10%", v: 3 },
+      { t: "10–25%", v: 6 },
+      { t: "25%+", v: 8 },
+    ]},
+];
+
+const PILLARS = ["Structure & Protection", "Visibility & Numbers", "Cash Flow & Taxes", "Wealth & Investing"];
+
+let state = {
+  answers: new Array(QUESTIONS.length).fill(null),
+  current: 0
+};
+
+const elQ = document.getElementById('sc-question');
+const elP = document.getElementById('sc-pillar');
+const elO = document.getElementById('sc-options');
+const elN = document.getElementById('sc-num');
+const elNext = document.getElementById('sc-next');
+const elBack = document.getElementById('sc-back');
+const elBar = document.getElementById('sc-bar');
+
+function renderQuestion(){
+  const idx = state.current;
+  const Q = QUESTIONS[idx];
+  elP.textContent = `Pillar ${PILLARS.indexOf(Q.pillar)+1} · ${Q.pillar}`;
+  elQ.textContent = Q.q;
+  elN.textContent = idx + 1;
+  elO.innerHTML = '';
+  Q.options.forEach((opt, i) => {
+    const id = `q${idx}-${i}`;
+    const label = document.createElement('label');
+    const selected = state.answers[idx] === i;
+    if (selected) label.classList.add('selected');
+    label.innerHTML = `
+      <input type="radio" name="q${idx}" id="${id}" value="${i}" ${selected?'checked':''}>
+      <span>${opt.t}</span>`;
+    label.addEventListener('click', () => {
+      state.answers[idx] = i;
+      // re-render to update selected styles
+      renderQuestion();
+    });
+    elO.appendChild(label);
+  });
+  elBack.style.visibility = idx === 0 ? 'hidden' : 'visible';
+  elNext.disabled = state.answers[idx] === null;
+  elNext.textContent = idx === QUESTIONS.length - 1 ? 'See My Score →' : 'Next →';
+  elBar.style.width = ((idx+1) / QUESTIONS.length * 100) + '%';
+}
+
+elNext.addEventListener('click', () => {
+  if (state.answers[state.current] === null) return;
+  if (state.current === QUESTIONS.length - 1) {
+    showResult();
+  } else {
+    state.current++;
+    renderQuestion();
+  }
+});
+elBack.addEventListener('click', () => {
+  if (state.current > 0) {
+    state.current--;
+    renderQuestion();
+  }
+});
+
+function showResult(){
+  document.getElementById('sc-question-view').style.display = 'none';
+  document.getElementById('sc-result-view').style.display = 'block';
+  elBar.style.width = '100%';
+
+  // Compute pillar subscores
+  const pillarScores = {};
+  const pillarMaxes = {};
+  PILLARS.forEach(p => { pillarScores[p] = 0; pillarMaxes[p] = 0; });
+  QUESTIONS.forEach((Q, i) => {
+    const max = Math.max(...Q.options.map(o => o.v));
+    pillarMaxes[Q.pillar] += max;
+    if (state.answers[i] !== null) {
+      pillarScores[Q.pillar] += Q.options[state.answers[i]].v;
+    }
+  });
+  // Normalize each pillar to 25 points
+  const normalized = {};
+  PILLARS.forEach(p => {
+    normalized[p] = pillarMaxes[p] ? Math.round((pillarScores[p] / pillarMaxes[p]) * 25) : 0;
+  });
+  const total = Object.values(normalized).reduce((a,b)=>a+b, 0);
+
+  document.getElementById('sc-final-score').textContent = total;
+
+  // Tier
+  const tierEl = document.getElementById('sc-tier');
+  const tierLbl = document.getElementById('sc-tier-label');
+  const tierMsg = document.getElementById('sc-tier-message');
+  if (total <= 40) {
+    tierEl.classList.add('sc-tier-1');
+    tierLbl.textContent = 'At Risk';
+    tierMsg.textContent = "You're producing on willpower. One bad quarter or one tax bill could hurt. Start with Structure & Visibility — that's where the foundation lives.";
+  } else if (total <= 70) {
+    tierEl.classList.add('sc-tier-2');
+    tierLbl.textContent = 'Earning, Not Keeping';
+    tierMsg.textContent = "You make good money but it's leaking out. Entity structure and a real cash-flow system are your fastest wins. The next $10K of your earnings is sitting in plain sight.";
+  } else {
+    tierEl.classList.add('sc-tier-3');
+    tierLbl.textContent = 'Building Wealth';
+    tierMsg.textContent = "Strong foundation. Time to shift from defense to offense — convert business profit into an income-producing portfolio. The MREI track is where you go next.";
+  }
+
+  // Pillar breakdown
+  const breakdownEl = document.getElementById('sc-pillar-breakdown');
+  breakdownEl.innerHTML = '';
+  PILLARS.forEach(p => {
+    const score = normalized[p];
+    const row = document.createElement('div');
+    row.className = 'sc-pillar-bar';
+    row.innerHTML = `
+      <div style="font-weight: 600; color: var(--color-navy-900)">${p}</div>
+      <div class="bar-wrap"><div class="bar-fill" style="width: ${score/25*100}%"></div></div>
+      <div style="text-align:right; font-family: var(--font-serif); font-weight: 700; color: var(--color-navy-900); font-size: 1.2rem">${score}<span style="color: var(--color-muted); font-size: .85rem">/25</span></div>
+    `;
+    breakdownEl.appendChild(row);
+  });
+
+  // Top 3 moves (lowest pillar(s) first)
+  const ranked = PILLARS.slice().sort((a,b) => normalized[a] - normalized[b]);
+  const moves = {
+    "Structure & Protection": "<strong>Get your entity right.</strong> If you're past ~$80K net commissions and still a sole prop, the S-corp conversation could be costing you real money every year. Separate business banking, fix commingling, and get the entity matched to your income.",
+    "Visibility & Numbers": "<strong>Install a real P&L.</strong> Set up QuickBooks or Wave (or hire a bookkeeper) and review your numbers monthly — not annually. You can't manage what you can't see.",
+    "Cash Flow & Taxes": "<strong>Install a commission cash-flow system.</strong> Fixed percentages from every check go to taxes/profit/owner pay/operating immediately — Profit First-style. Then get a CPA you talk to quarterly, not annually.",
+    "Wealth & Investing": "<strong>Set a written investment net-worth target.</strong> Specific dollar, specific date. Then route a fixed percentage of every commission into investment assets. Start with one property in the next 12 months.",
+  };
+  const movesEl = document.getElementById('sc-moves');
+  movesEl.innerHTML = ranked.slice(0,3).map(p => `<li style="margin-bottom: 12px">${moves[p]}</li>`).join('');
+
+  // Tier-based product recommendation
+  const recEl = document.getElementById('sc-recommend');
+  const recCard = (eyebrow, title, body, href, cta, secondary) => `
+    <div class="card" style="border-color: var(--color-red-400)">
+      <span class="pill" style="background: var(--color-red-100); color: var(--color-red-600)">${eyebrow}</span>
+      <h3 style="margin-top: var(--space-2)">${title}</h3>
+      <p>${body}</p>
+      <div style="display:flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-3)">
+        <a href="${href}" class="btn btn-primary">${cta}</a>
+        ${secondary || ''}
+      </div>
+    </div>`;
+  if (total <= 40) {
+    recEl.innerHTML = recCard(
+      'Recommended for your score',
+      'Start with the Broker Financial Toolkit',
+      'Your foundation needs the models: entity structure decision kit, commission cash-flow system, and quarterly tax set-aside. The Toolkit is the one-time ($197) package built to fix exactly the pillars you scored lowest on.',
+      'toolkit.html', 'See the Toolkit — $197 →');
+  } else if (total <= 70) {
+    recEl.innerHTML = recCard(
+      'Recommended for your score',
+      'The Toolkit will find your leak',
+      "You're earning — the money is leaking on the way through. The Toolkit's commission cash-flow model and S-corp threshold math typically recover more than the $197 in the first quarter. Then the Dashboard keeps it fixed automatically.",
+      'toolkit.html', 'See the Toolkit — $197 →',
+      '<a href="dashboard.html" class="btn btn-secondary">Or the Dashboard — $49/mo →</a>');
+  } else {
+    recEl.innerHTML = recCard(
+      'Recommended for your score',
+      'Track it — and go on offense',
+      "Your foundation is solid, so the win is consistency and growth. The Broker Financial Dashboard re-scores you monthly so the discipline holds, and Boomerang turns your past clients into your next pipeline.",
+      'dashboard.html', 'Join the Dashboard Waitlist →',
+      '<a href="boomerang.html" class="btn btn-secondary">Explore Boomerang →</a>');
+  }
+
+  // Hidden form fields for Netlify submission
+  document.getElementById('sc-form-score').value = total;
+  document.getElementById('sc-form-tier').value = tierLbl.textContent;
+  document.getElementById('sc-form-pillars').value = JSON.stringify(normalized);
+
+  // Scroll to top of result
+  window.scrollTo({top: document.querySelector('section.section').offsetTop - 40, behavior: 'smooth'});
+}
+
+document.getElementById('sc-restart').addEventListener('click', () => {
+  state = { answers: new Array(QUESTIONS.length).fill(null), current: 0 };
+  document.getElementById('sc-result-view').style.display = 'none';
+  document.getElementById('sc-question-view').style.display = 'block';
+  document.getElementById('sc-tier').classList.remove('sc-tier-1','sc-tier-2','sc-tier-3');
+  renderQuestion();
+});
+
+// Initial render
+renderQuestion();
+</script>
+</body>
+</html>

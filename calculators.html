@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real Estate Investing Calculators — Free, Browser-Based | Wealth Building Broker</title>
+<meta name="description" content="Free real estate investing calculators: mortgage, rental cash flow, BRRRR, cap rate, cash-on-cash ROI, 1031 exchange, fix & flip, Rule of 72, and rent vs. buy. All instant, all browser-based.">
+<link rel="canonical" href="https://www.wealthbuildingbroker.com/calculators.html">
+<meta property="og:title" content="9 Free Real Estate Investing Calculators">
+<meta property="og:description" content="BRRRR, cash flow, cap rate, 1031, and more — all free, all instant.">
+<meta property="og:type" content="website">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Wealth Building Broker Calculators",
+  "applicationCategory":"FinanceApplication",
+  "offers":{"@type":"Offer","price":"0"},
+  "operatingSystem":"All"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html" class="brand"><img src="assets/img/logo.png" alt="Wealth Building Broker logo" class="brand-mark"><span>Wealth Building Broker</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+            <ul class="nav-links">
+      <li><a href="agents-cfo.html">The Agent's CFO</a></li>
+      <li><a href="toolkit.html">Toolkit</a></li>
+      <li><a href="coaching-agents.html">For Agents</a></li>
+      <li><a href="agent-investor.html">For Investors</a></li>
+      <li><a href="scorecard.html">Scorecard</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="book.html" class="btn btn-primary btn-sm">Book a Call</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero" style="padding: var(--space-8) 0">
+  <div class="container">
+    <div class="hero-eyebrow">Tools That Work</div>
+    <h1>Real Estate Investing Calculators</h1>
+    <p class="lead">Nine browser-based calculators for every stage of a deal — from quick screening to detailed underwriting. No signup. No paywall. Just math.</p>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container">
+    <p style="text-align:center; margin-bottom:var(--space-7); font-weight:600">
+      Jump to:
+      <a href="#calc-mortgage">Mortgage</a> ·
+      <a href="#calc-rental">Rental Cash Flow</a> ·
+      <a href="#calc-brrrr">BRRRR</a> ·
+      <a href="#calc-cap">Cap Rate</a> ·
+      <a href="#calc-coc">Cash-on-Cash</a> ·
+      <a href="#calc-1031">1031 Exchange</a> ·
+      <a href="#calc-flip">Fix &amp; Flip</a> ·
+      <a href="#calc-72">Rule of 72</a> ·
+      <a href="#calc-rentbuy">Rent vs Buy</a>
+    </p>
+
+    <!-- 1. MORTGAGE -->
+    <div class="calc" id="calc-mortgage">
+      <h3>🏦 Mortgage Calculator <span class="pill">PITI + Total Interest</span></h3>
+      <p>Compute principal + interest, full PITI, and lifetime interest cost.</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>Home Price</label>
+          <div class="input-prefix"><input type="number" id="mort-price" value="650000" min="0"></div>
+          <label>Down Payment (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="mort-down" value="20" min="0" max="100" step="0.5"></div>
+          <label>Interest Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="mort-rate" value="6.85" step="0.01"></div>
+          <label>Loan Term (years)</label>
+          <input type="number" id="mort-years" value="30" min="1">
+          <label>Annual Property Tax Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="mort-tax" value="1.10" step="0.01"></div>
+          <label>Annual Insurance ($)</label>
+          <div class="input-prefix"><input type="number" id="mort-ins" value="1800"></div>
+          <label>Monthly HOA ($)</label>
+          <div class="input-prefix"><input type="number" id="mort-hoa" value="0"></div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="label">Loan Amount</span><span class="value" id="mort-loan">—</span></div>
+          <div class="calc-result-row"><span class="label">Monthly P&amp;I</span><span class="value" id="mort-pi">—</span></div>
+          <div class="calc-result-row highlight"><span class="label">Total Monthly Payment (PITI + HOA)</span><span class="value" id="mort-piti">—</span></div>
+          <div class="calc-result-row"><span class="label">Total Interest Paid</span><span class="value" id="mort-totalint">—</span></div>
+          <div class="calc-result-row"><span class="label">Total of Payments</span><span class="value" id="mort-totalpaid">—</span></div>
+          <p class="calc-note">PITI = Principal, Interest, Taxes, Insurance. Property tax rate varies by county — California averages ~1.1% under Prop 13.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. RENTAL CASH FLOW -->
+    <div class="calc" id="calc-rental">
+      <h3>🏠 Rental Property Cash Flow Analyzer <span class="pill">Pro-Forma</span></h3>
+      <p>Full underwriting: NOI, cap rate, cash-on-cash, GRM, 1% rule.</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>Purchase Price</label>
+          <div class="input-prefix"><input type="number" id="rent-price" value="500000"></div>
+          <label>Down Payment (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rent-down" value="25" step="0.5"></div>
+          <label>Interest Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rent-rate" value="7.25" step="0.01"></div>
+          <label>Loan Term (years)</label>
+          <input type="number" id="rent-years" value="30">
+          <label>Monthly Gross Rent</label>
+          <div class="input-prefix"><input type="number" id="rent-monthly" value="3800"></div>
+          <label>Vacancy Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rent-vac" value="5" step="0.5"></div>
+          <label>Property Tax Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rent-tax" value="1.10" step="0.01"></div>
+          <label>Annual Insurance ($)</label>
+          <div class="input-prefix"><input type="number" id="rent-ins" value="1800"></div>
+          <label>Property Mgmt (% of rent)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rent-mgmt" value="8" step="0.5"></div>
+          <label>Maintenance (% of rent)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rent-maint" value="5" step="0.5"></div>
+          <label>CapEx Reserve (% of rent)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rent-capex" value="5" step="0.5"></div>
+          <label>Monthly HOA</label>
+          <div class="input-prefix"><input type="number" id="rent-hoa" value="0"></div>
+          <label>Monthly Utilities (owner-paid)</label>
+          <div class="input-prefix"><input type="number" id="rent-util" value="0"></div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="label">Net Operating Income (NOI)</span><span class="value" id="rent-noi">—</span></div>
+          <div class="calc-result-row highlight"><span class="label">Annual Cash Flow</span><span class="value" id="rent-cashflow">—</span></div>
+          <div class="calc-result-row"><span class="label">Monthly Cash Flow</span><span class="value" id="rent-monthlycf">—</span></div>
+          <div class="calc-result-row"><span class="label">Cash-on-Cash Return</span><span class="value" id="rent-coc">—</span></div>
+          <div class="calc-result-row"><span class="label">Cap Rate</span><span class="value" id="rent-cap">—</span></div>
+          <div class="calc-result-row"><span class="label">Gross Rent Multiplier</span><span class="value" id="rent-grm">—</span></div>
+          <div class="calc-result-row"><span class="label">1% Rule Score</span><span class="value" id="rent-1pct">—</span></div>
+          <p class="calc-note">Closing costs estimated at 3% of price. Adjust mgmt/maint/capex to match your operating model.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. BRRRR -->
+    <div class="calc" id="calc-brrrr">
+      <h3>🔄 BRRRR Calculator <span class="pill">Buy · Rehab · Rent · Refi · Repeat</span></h3>
+      <p>How much capital do you recover at refinance? What's the post-refi cash flow?</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>Purchase Price</label>
+          <div class="input-prefix"><input type="number" id="brrrr-purchase" value="250000"></div>
+          <label>Rehab Budget</label>
+          <div class="input-prefix"><input type="number" id="brrrr-rehab" value="50000"></div>
+          <label>Closing + Holding Costs</label>
+          <div class="input-prefix"><input type="number" id="brrrr-closing" value="15000"></div>
+          <label>After Repair Value (ARV)</label>
+          <div class="input-prefix"><input type="number" id="brrrr-arv" value="400000"></div>
+          <label>Refinance LTV (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="brrrr-ltv" value="75" step="0.5"></div>
+          <label>Refinance Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="brrrr-rate" value="7.25" step="0.01"></div>
+          <label>Refi Term (years)</label>
+          <input type="number" id="brrrr-years" value="30">
+          <label>Monthly Rent</label>
+          <div class="input-prefix"><input type="number" id="brrrr-rent" value="2900"></div>
+          <label>Op Expenses (% of rent)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="brrrr-opex" value="40" step="1"></div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="label">All-In Cost</span><span class="value" id="brrrr-allin">—</span></div>
+          <div class="calc-result-row"><span class="label">Cash-Out Refi Loan</span><span class="value" id="brrrr-refi">—</span></div>
+          <div class="calc-result-row"><span class="label">Capital Recovery</span><span class="value" id="brrrr-recovery">—</span></div>
+          <div class="calc-result-row highlight"><span class="label">Cash Left in Deal</span><span class="value" id="brrrr-left">—</span></div>
+          <div class="calc-result-row"><span class="label">Monthly Cash Flow (post-refi)</span><span class="value" id="brrrr-cf">—</span></div>
+          <div class="calc-result-row"><span class="label">Cash-on-Cash on Remaining</span><span class="value" id="brrrr-coc">—</span></div>
+          <p class="calc-note">"Infinite return" appears when the refi pulls out all your invested capital. The classic BRRRR home run.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. CAP RATE -->
+    <div class="calc" id="calc-cap">
+      <h3>📊 Cap Rate Calculator <span class="pill">Quick Screen</span></h3>
+      <p>One of the fastest ways to compare commercial-style deals.</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>Annual NOI (Net Operating Income)</label>
+          <div class="input-prefix"><input type="number" id="cap-noi" value="42000"></div>
+          <label>Purchase Price (or Market Value)</label>
+          <div class="input-prefix"><input type="number" id="cap-price" value="600000"></div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row highlight"><span class="label">Cap Rate</span><span class="value" id="cap-rate">—</span></div>
+          <div class="calc-result-row"><span class="label">Rating</span><span class="value" id="cap-rating" style="font-size:1.1rem">—</span></div>
+          <p class="calc-note">Cap rate = NOI / Price. Useful for comparable assets in the same market — and meaningless across asset classes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. CASH-ON-CASH -->
+    <div class="calc" id="calc-coc">
+      <h3>💵 Cash-on-Cash ROI Calculator <span class="pill">Yield on Cash</span></h3>
+      <p>The annual yield on your actual cash invested — the true investor metric.</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>Annual Cash Flow</label>
+          <div class="input-prefix"><input type="number" id="coc-cf" value="6500"></div>
+          <label>Total Cash Invested (down + closing + rehab)</label>
+          <div class="input-prefix"><input type="number" id="coc-invested" value="70000"></div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row highlight"><span class="label">Cash-on-Cash Return</span><span class="value" id="coc-result">—</span></div>
+          <div class="calc-result-row"><span class="label">Investor Verdict</span><span class="value" id="coc-verdict" style="font-size:1.1rem">—</span></div>
+          <p class="calc-note">CoC excludes appreciation and principal paydown. It measures only the cash yield on your invested dollars.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. 1031 -->
+    <div class="calc" id="calc-1031">
+      <h3>📈 1031 Exchange Estimator <span class="pill">Tax Deferred</span></h3>
+      <p>Estimate the federal capital gains + depreciation recapture + state tax you'd defer with a 1031.</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>Sale Price (Net of Selling Costs)</label>
+          <div class="input-prefix"><input type="number" id="ex-sale" value="900000"></div>
+          <label>Original Cost Basis</label>
+          <div class="input-prefix"><input type="number" id="ex-basis" value="450000"></div>
+          <label>Accumulated Depreciation</label>
+          <div class="input-prefix"><input type="number" id="ex-deprec" value="120000"></div>
+          <label>Long-Term Capital Gains Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="ex-ltcg" value="20" step="0.5"></div>
+          <label>Depreciation Recapture Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="ex-drate" value="25" step="0.5"></div>
+          <label>State Capital Gains Rate (CA ~13.3%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="ex-state" value="13.3" step="0.1"></div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="label">Total Realized Gain</span><span class="value" id="ex-gain">—</span></div>
+          <div class="calc-result-row"><span class="label">Tax if Sold Outright</span><span class="value" id="ex-taxsale">—</span></div>
+          <div class="calc-result-row"><span class="label">Net to Reinvest (Sale)</span><span class="value" id="ex-net">—</span></div>
+          <div class="calc-result-row"><span class="label">Net to Reinvest (1031)</span><span class="value" id="ex-1031">—</span></div>
+          <div class="calc-result-row highlight"><span class="label">Tax Deferred via 1031</span><span class="value" id="ex-deferred">—</span></div>
+          <p class="calc-note">Includes 3.8% Net Investment Income Tax. 1031 exchanges have strict 45-day identification and 180-day closing deadlines. <strong>Consult a Qualified Intermediary and CPA before acting.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. FIX & FLIP -->
+    <div class="calc" id="calc-flip">
+      <h3>🔨 Fix &amp; Flip Profit Calculator <span class="pill">70% Rule</span></h3>
+      <p>Forecast your profit, margin, and ROI on a flip — and check it against the 70% rule.</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>After Repair Value (ARV)</label>
+          <div class="input-prefix"><input type="number" id="flip-arv" value="550000"></div>
+          <label>Purchase Price</label>
+          <div class="input-prefix"><input type="number" id="flip-purchase" value="350000"></div>
+          <label>Rehab Budget</label>
+          <div class="input-prefix"><input type="number" id="flip-rehab" value="55000"></div>
+          <label>Holding Costs (taxes, insurance, utilities)</label>
+          <div class="input-prefix"><input type="number" id="flip-hold" value="8000"></div>
+          <label>Selling Costs (% of ARV — agent, escrow, transfer)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="flip-sell" value="8" step="0.5"></div>
+          <label>Financing Costs (interest + points)</label>
+          <div class="input-prefix"><input type="number" id="flip-fin" value="18000"></div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row highlight"><span class="label">Estimated Profit</span><span class="value" id="flip-profit">—</span></div>
+          <div class="calc-result-row"><span class="label">Profit Margin</span><span class="value" id="flip-margin">—</span></div>
+          <div class="calc-result-row"><span class="label">ROI on Total Capital</span><span class="value" id="flip-roi">—</span></div>
+          <div class="calc-result-row"><span class="label">Max Purchase (70% Rule)</span><span class="value" id="flip-70">—</span></div>
+          <p class="calc-note">70% rule: Max offer = (ARV × 0.70) − Rehab. A conservative ceiling — flexible by market.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. RULE OF 72 -->
+    <div class="calc" id="calc-72">
+      <h3>📐 Rule of 72 / Wealth Doubling Calculator <span class="pill">Compound Growth</span></h3>
+      <p>How long until your money doubles? How big does it grow over time?</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>Expected Annual Return (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="r72-rate" value="9" step="0.5"></div>
+          <label>Starting Investment</label>
+          <div class="input-prefix"><input type="number" id="r72-start" value="100000"></div>
+          <label>Years</label>
+          <input type="number" id="r72-years" value="20">
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="label">Years to Double</span><span class="value" id="r72-double">—</span></div>
+          <div class="calc-result-row highlight"><span class="label">Future Value</span><span class="value" id="r72-fv">—</span></div>
+          <div class="calc-result-row"><span class="label">Total Gain</span><span class="value" id="r72-gain">—</span></div>
+          <p class="calc-note">The Rule of 72 is a mental-math shortcut. Real estate's long-term unleveraged return has historically averaged 8–10% including appreciation and cash flow — and significantly higher with leverage.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. RENT VS BUY -->
+    <div class="calc" id="calc-rentbuy">
+      <h3>🤔 Rent vs. Buy Calculator <span class="pill">Personal Use</span></h3>
+      <p>For owner-occupants — should you keep renting or buy?</p>
+      <div class="calc-body">
+        <div class="calc-inputs">
+          <label>Home Price</label>
+          <div class="input-prefix"><input type="number" id="rb-price" value="800000"></div>
+          <label>Down Payment (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rb-down" value="20" step="0.5"></div>
+          <label>Mortgage Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rb-rate" value="6.85" step="0.01"></div>
+          <label>Years You Plan to Stay</label>
+          <input type="number" id="rb-years" value="7">
+          <label>Annual Appreciation (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rb-appr" value="4" step="0.5"></div>
+          <label>Property Tax Rate (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rb-tax" value="1.1" step="0.01"></div>
+          <label>Annual Maint + Insurance (% of value)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rb-maint" value="1.5" step="0.1"></div>
+          <label>Comparable Monthly Rent</label>
+          <div class="input-prefix"><input type="number" id="rb-rent" value="3600"></div>
+          <label>Expected Annual Rent Increase (%)</label>
+          <div class="input-suffix" data-suffix="%"><input type="number" id="rb-rentinc" value="3" step="0.5"></div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="label">Total Rent Paid Over Period</span><span class="value" id="rb-totalrent">—</span></div>
+          <div class="calc-result-row"><span class="label">Net Ownership Cost (after equity)</span><span class="value" id="rb-totalown">—</span></div>
+          <div class="calc-result-row"><span class="label">Home Value at End</span><span class="value" id="rb-equity">—</span></div>
+          <div class="calc-result-row highlight"><span class="label">Verdict</span><span class="value" id="rb-verdict" style="font-size:1.2rem">—</span></div>
+          <p class="calc-note">Simplified model — doesn't include tax deductions, investment opportunity cost of down payment, or transaction costs on exit. Use as a directional comparison, not a final decision.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <strong>Want these as a printable PDF?</strong> All calculator outputs can be screenshotted, or head to <a href="resources.html">Resources</a> for downloadable PDF worksheets you can fill out by hand.
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color:#fff"><img src="assets/img/logo.png" alt="Wealth Building Broker logo" class="brand-mark"><span>Wealth Building Broker</span></div>
+        <p style="margin-top:var(--space-3); color:#aab8cd; max-width:380px">Real estate investing education, calculators, and resources from Lance Hulsey — California broker and host of <em>Keeping it Real Estate</em>.</p>
+        <div class="socials">
+          <a href="https://www.youtube.com/@lancehulseybroker" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
+          <a href="https://www.instagram.com/lancehulseybroker" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+          <a href="https://www.amazon.com/Invest-yourself-Strategies-Millennial-investors-ebook/dp/B0F2SK18VJ" target="_blank" rel="noopener" aria-label="Amazon eBook">📘</a>
+        </div>
+      </div>
+      <div><h4>Products</h4><ul><li><a href="scorecard.html">Free Scorecard</a></li><li><a href="toolkit.html">Financial Toolkit</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="boomerang.html">Boomerang</a></li></ul></div>
+      <div><h4>Tools</h4><ul><li><a href="calculators.html">Calculators</a></li><li><a href="resources.html">Free Downloads</a></li><li><a href="tax-guide.html">Tax Guide</a></li><li><a href="forum.html">Forum</a></li></ul></div>
+      <div><h4>Learn</h4><ul><li><a href="https://www.youtube.com/@lancehulseybroker" target="_blank" rel="noopener">YouTube Channel</a></li><li><a href="ebook.html">Invest in Yourself eBook</a></li><li><a href="about.html#mrei">MREI Models</a></li><li><a href="about.html">About Lance</a></li></ul></div>
+      <div><h4>Connect</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="https://www.instagram.com/lancehulseybroker" target="_blank" rel="noopener">@lancehulseybroker</a></li><li><a href="https://www.youtube.com/@lancehulseybroker" target="_blank" rel="noopener">YouTube Channel</a></li><li>KW Thrive SC — Capitola, CA</li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li><li><a href="disclaimer.html">Full Disclaimer</a></li><li><a href="accessibility.html">Accessibility</a></li></ul></div>
+    </div>
+    <div class="disclaimer">
+      <p><strong>Lance Hulsey</strong> — California Real Estate Broker · <strong>DRE# 01724888</strong> · Co-Investor, KW Thrive SC Franchise, Capitola, California.</p>
+      <p>Keller Williams Realty, Inc., a franchise company, is an Equal Opportunity Employer and supports the Fair Housing Act. Each Keller Williams® office is independently owned and operated.</p>
+      <p>This website is for <strong>informational and educational purposes only</strong>. Nothing on this site constitutes tax, legal, accounting, financial, or investment advice. Lance Hulsey is a licensed real estate broker, not a CPA, attorney, or financial advisor. Tax laws change frequently and your individual circumstances are unique — always consult a qualified tax professional, attorney, and/or financial advisor before making investment decisions. Calculators provide estimates based on inputs you enter and assumptions you may need to adjust for your situation; they are not guarantees of performance or outcomes. Real estate investing involves risk, including the potential loss of capital.</p>
+      <p>© <span data-year>2026</span> Wealth Building Broker. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/calculators.js"></script>
+</body>
+</html>
