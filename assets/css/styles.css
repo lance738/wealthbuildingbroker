@@ -290,8 +290,8 @@ a:hover { color: var(--color-gold-600); }
 }
 .hero-card h3 { color: #fff; margin-top: 0; }
 .hero-card p { color: #cad6e8; }
-.hero-card a { color: var(--color-gold-400); text-decoration: underline; }
-.hero-card a:hover { color: #ffe9b3; }
+.hero-card a:not(.btn) { color: #f4b8bb; text-decoration: underline; }
+.hero-card a:not(.btn):hover { color: #ffffff; }
 
 /* Cards */
 .card {
